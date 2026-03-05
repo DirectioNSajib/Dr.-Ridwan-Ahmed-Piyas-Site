@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Learning Hub - Video & PDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #1a2a3a;
+            padding: 15px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .main-content {
+            display: flex;
+            height: 80vh;
+            min-height: 500px;
+        }
+
+        /* Left side - Video */
+        .video-side {
+            flex: 2;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #2c3e50;
+        }
+
+        .video-container {
+            flex: 1;
+            background: #000;
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            outline: none;
+        }
+
+        .video-info {
+            background: #34495e;
+            color: white;
+            padding: 12px 15px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Right side - PDF */
+        .pdf-side {
+            flex: 1;
+            background: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+        }
+
+        .pdf-viewer {
+            flex: 1;
+            background: #bdc3c7;
+            min-height: 300px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .pdf-placeholder {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+        }
+
+        .pdf-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        /* Resources list */
+        .resources {
+            height: 200px;
+            background: white;
+            border-top: 2px solid #2c3e50;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .resources h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .resource-item:hover {
+            background: #e9ecef;
+            border-left-color: #3498db;
+        }
+
+        .resource-item.active {
+            background: #d4e6f1;
+            border-left-color: #2980b9;
+        }
+
+        .resource-icon {
+            width: 30px;
+            height: 30px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .resource-icon.pdf {
+            background: #e74c3c;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .resource-type {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+        }
+
+        .drive-badge {
+            background: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.6rem;
+            margin-left: 8px;
+        }
+
+        /* Add resource section */
+        .add-section {
+            padding: 10px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .add-input {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .add-input input {
+            flex: 1;
+            padding: 6px 8px;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+
+        .add-input select {
+            width: 70px;
+            padding: 6px;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+
+        .add-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+
+        .add-btn:hover {
+            background: #229954;
+        }
+
+        .note {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Simple Learning Hub</h1>
+            <p>Click on any resource to load video or PDF from Google Drive</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Side - Video -->
+            <div class="video-side">
+                <div class="video-container">
+                    <video id="videoPlayer" controls>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <div class="video-title" id="videoTitle">Select a video to play</div>
+                    <div><i class="fas fa-play-circle"></i> Click play button to start</div>
+                </div>
+            </div>
+
+            <!-- Right Side - PDF -->
+            <div class="pdf-side">
+                <div class="pdf-viewer">
+                    <iframe id="pdfFrame" style="display: none;"></iframe>
+                    <div class="pdf-placeholder" id="pdfPlaceholder">
+                        <i class="fas fa-file-pdf"></i>
+                        <p>No PDF selected</p>
+                        <small>Click on a PDF from the list</small>
+                    </div>
+                </div>
+
+                <!-- Resources List -->
+                <div class="resources">
+                    <h3><i class="fas fa-folder-open"></i> Course Materials</h3>
+                    <div id="resourcesList">
+                        <!-- Resources will be added here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Add New Resource Section -->
+                <div class="add-section">
+                    <div class="add-input">
+                        <input type="text" id="resourceName" placeholder="Resource name (e.g., Lecture 1)">
+                        <select id="resourceType">
+                            <option value="video">Video</option>
+                            <option value="pdf">PDF</option>
+                        </select>
+                    </div>
+                    <div class="add-input">
+                        <input type="text" id="driveLink" placeholder="Google Drive share link or file ID">
+                    </div>
+                    <button class="add-btn" onclick="addResource()">
+                        <i class="fas fa-plus"></i> Add to List
+                    </button>
+                    <div class="note">
+                        <i class="fab fa-google-drive"></i> Use Google Drive share links
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample resources (with working Google Drive file IDs - replace these with your own)
+        let resources = [
+            {
+                id: 1,
+                name: 'Sample Video Lecture',
+                type: 'video',
+                driveId: '1VxqJ3W6qKJgH5s8d9fG7hJ2kL4mN5bP6', // Replace with your video ID
+                driveLink: 'https://drive.google.com/file/d/1VxqJ3W6qKJgH5s8d9fG7hJ2kL4mN5bP6/view'
+            },
+            {
+                id: 2,
+                name: 'Sample PDF Notes',
+                type: 'pdf',
+                driveId: '1AbCdEfGhIjKlMnOpQrStUvWxYz123456', // Replace with your PDF ID
+                driveLink: 'https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz123456/view'
+            },
+            {
+                id: 3,
+                name: 'Introduction Video',
+                type: 'video',
+                driveId: '2BcDeFgHiJkLmNoPqRsTuVwXyZ789012', // Replace with your video ID
+                driveLink: 'https://drive.google.com/file/d/2BcDeFgHiJkLmNoPqRsTuVwXyZ789012/view'
+            }
+        ];
+
+        let currentVideo = null;
+        let currentPdf = null;
+
+        // DOM elements
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoTitle = document.getElementById('videoTitle');
+        const pdfFrame = document.getElementById('pdfFrame');
+        const pdfPlaceholder = document.getElementById('pdfPlaceholder');
+        const resourcesList = document.getElementById('resourcesList');
+
+        // Initialize the page
+        window.onload = function() {
+            renderResources();
+        };
+
+        // Extract file ID from Google Drive link
+        function extractDriveId(link) {
+            // Handle different formats
+            let id = link;
+            
+            // If it's a full URL, extract the ID
+            if (link.includes('drive.google.com')) {
+                // Pattern: /file/d/FILE_ID/view
+                const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                if (match) {
+                    id = match[1];
+                }
+            }
+            
+            return id;
+        }
+
+        // Render resources list
+        function renderResources() {
+            let html = '';
+            
+            resources.forEach(resource => {
+                const icon = resource.type === 'video' ? 'fa-video' : 'fa-file-pdf';
+                const iconClass = resource.type === 'video' ? '' : 'pdf';
+                
+                html += `
+                    <div class="resource-item" onclick="loadResource(${resource.id})" id="resource-${resource.id}">
+                        <div class="resource-icon ${iconClass}">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="resource-info">
+                            <div class="resource-name">${resource.name}</div>
+                            <div class="resource-type">
+                                ${resource.type.toUpperCase()} 
+                                <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resourcesList.innerHTML = html;
+        }
+
+        // Load resource (video or PDF)
+        function loadResource(resourceId) {
+            const resource = resources.find(r => r.id === resourceId);
+            
+            if (!resource) return;
+            
+            // Remove active class from all
+            document.querySelectorAll('.resource-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            const activeItem = document.getElementById(`resource-${resourceId}`);
+            if (activeItem) {
+                activeItem.classList.add('active');
+            }
+            
+            if (resource.type === 'video') {
+                loadVideo(resource);
+            } else {
+                loadPdf(resource);
+            }
+        }
+
+        // Load video from Google Drive
+        function loadVideo(resource) {
+            const driveId = extractDriveId(resource.driveLink);
+            
+            // For Google Drive videos, we need to use the embed link
+            // Note: The video must be shared with "Anyone with the link can view"
+            const embedUrl = `https://drive.google.com/file/d/17b-2Bd-NAGNJpQmLiBBwz5OlpptrpZI-/view?usp=drive_link`;
+            
+            // For direct video playback, we can use the Google Drive embed
+            videoPlayer.innerHTML = `<source src="https://drive.google.com/uc?export=download&id=${driveId}" type="video/mp4">`;
+            videoPlayer.load();
+            
+            videoTitle.textContent = resource.name;
+            currentVideo = resource;
+            
+            // Try to play
+            videoPlayer.play().catch(e => {
+                console.log('Autoplay failed:', e);
+            });
+        }
+
+        // Load PDF from Google Drive
+        function loadPdf(resource) {
+            const driveId = extractDriveId(resource.driveLink);
+            
+            // Google Drive PDF embed URL
+            const pdfUrl = `https://drive.google.com/file/d/${driveId}/preview`;
+            
+            pdfFrame.src = pdfUrl;
+            pdfFrame.style.display = 'block';
+            pdfPlaceholder.style.display = 'none';
+            
+            currentPdf = resource;
+        }
+
+        // Add new resource from input fields
+        function addResource() {
+            const nameInput = document.getElementById('resourceName');
+            const typeSelect = document.getElementById('resourceType');
+            const linkInput = document.getElementById('driveLink');
+            
+            const name = nameInput.value.trim();
+            const type = typeSelect.value;
+            const link = linkInput.value.trim();
+            
+            if (!name) {
+                alert('Please enter a resource name');
+                return;
+            }
+            
+            if (!link) {
+                alert('Please enter a Google Drive link or file ID');
+                return;
+            }
+            
+            // Extract ID to validate format
+            const driveId = extractDriveId(link);
+            if (!driveId || driveId.length < 10) {
+                alert('Please enter a valid Google Drive file ID or link');
+                return;
+            }
+            
+            // Create new resource
+            const newResource = {
+                id: Date.now(), // simple unique ID
+                name: name,
+                type: type,
+                driveLink: link,
+                driveId: driveId
+            };
+            
+            resources.push(newResource);
+            renderResources();
+            
+            // Clear inputs
+            nameInput.value = '';
+            linkInput.value = '';
+            
+            // Auto-load the new resource
+            loadResource(newResource.id);
+        }
+
+        // Helper function to test Google Drive links
+        function testDriveLink() {
+            console.log('To use Google Drive files:');
+            console.log('1. Upload your file to Google Drive');
+            console.log('2. Right-click file → Share → "Anyone with the link"');
+            console.log('3. Copy the link (e.g., https://drive.google.com/file/d/FILE_ID/view)');
+            console.log('4. Paste the link in the input field');
+        }
+
+        // Call test function in console
+        console.log('=== INSTRUCTIONS ===');
+        testDriveLink();
+    </script>
+</body>
+</html>
