@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ridwan Ahmed Piyas | MBBS · Healer</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f9fc;
+      color: #1a2b3c;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* header / nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(0, 30, 50, 0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #0a3847;
+    }
+
+    .logo i {
+      color: #2a9d8f;
+      font-size: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e4a5f;
+      transition: color 0.2s;
+      font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+      color: #2a9d8f;
+    }
+
+    .btn-appointment {
+      background: #2a9d8f;
+      color: white !important;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
+    }
+
+    .btn-appointment:hover {
+      background: #21867a;
+      color: white;
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+      margin: 3rem 0 5rem;
+    }
+
+    .hero-content {
+      flex: 1 1 350px;
+    }
+
+    .hero-badge {
+      background: #d0e8e4;
+      color: #1b6b5e;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #0b2b36;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 span {
+      color: #2a9d8f;
+      border-bottom: 4px solid #b0e0d6;
+      display: inline-block;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #2d4b5a;
+      margin-bottom: 2rem;
+      max-width: 550px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f3b45;
+    }
+
+    .stat-label {
+      color: #4d6978;
+      font-weight: 500;
+    }
+
+    .hero-image {
+      flex: 1 1 300px;
+      background: linear-gradient(145deg, #c0e2db, #e6f3ef);
+      border-radius: 50% 50% 30% 70% / 40% 30% 70% 60%;
+      padding: 1rem;
+      box-shadow: 20px 20px 30px rgba(0, 60, 70, 0.1);
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+      background: #b7d9d2;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,0.1));
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #0b2b36;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 4px;
+      background: #2a9d8f;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    /* about + qualifications */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin: 3rem 0 4rem;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 40px;
+      box-shadow: 0 10px 30px rgba(0, 30, 40, 0.05);
+    }
+
+    .about-text {
+      flex: 2 1 300px;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #153e4a;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      color: #2a4a58;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .qual-grid {
+      flex: 1.5 1 250px;
+      background: #f0f7f5;
+      padding: 2rem;
+      border-radius: 32px;
+    }
+
+    .qual-grid h4 {
+      font-size: 1.5rem;
+      color: #115a4f;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qual-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 1.8rem;
+    }
+
+    .qual-icon {
+      background: #2a9d8f20;
+      width: 48px;
+      height: 48px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2a9d8f;
+      font-size: 1.5rem;
+    }
+
+    .qual-content h5 {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #10444b;
+    }
+
+    .qual-content p {
+      color: #446d79;
+    }
+
+    /* services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .service-card {
+      background: white;
+      padding: 2rem 1.8rem;
+      border-radius: 28px;
+      box-shadow: 0 12px 26px rgba(26, 58, 70, 0.06);
+      transition: transform 0.2s;
+      border: 1px solid rgba(42, 157, 143, 0.1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .service-icon {
+      background: #def0ec;
+      width: 64px;
+      height: 64px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #2a9d8f;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #10343e;
+    }
+
+    .service-card p {
+      color: #3e606b;
+    }
+
+    /* gallery / work */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0 3rem;
+      justify-content: center;
+    }
+
+    .gallery-item {
+      flex: 1 1 200px;
+      max-width: 260px;
+      background: white;
+      border-radius: 2rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: 0 8px 18px #d9e9e5;
+    }
+
+    .gallery-item i {
+      font-size: 3.2rem;
+      color: #2a9d8f;
+      background: #e0f0ec;
+      padding: 1rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-item p {
+      font-weight: 500;
+      color: #1c4a57;
+    }
+
+    /* testimonials */
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .testi-card {
+      background: white;
+      flex: 1 1 280px;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 14px 28px rgba(0, 45, 50, 0.06);
+      border-left: 6px solid #2a9d8f;
+    }
+
+    .testi-card i {
+      color: #b2dfd6;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .testi-card p {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #2d4f5c;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-author img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #c5ddd6;
+      object-fit: cover;
+    }
+
+    .author-info h5 {
+      font-weight: 700;
+      color: #0b3a40;
+    }
+
+    /* contact / CTA */
+    .contact-section {
+      background: white;
+      border-radius: 50px;
+      padding: 3rem 2.5rem;
+      margin: 4rem 0 2rem;
+      box-shadow: 0 20px 40px rgba(20, 70, 60, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .contact-details {
+      flex: 2 1 280px;
+    }
+
+    .contact-details h2 {
+      font-size: 2.2rem;
+      color: #08333e;
+    }
+
+    .contact-details p {
+      font-size: 1.2rem;
+      color: #266277;
+      margin: 0.5rem 0 1.8rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .contact-method i {
+      width: 48px;
+      height: 48px;
+      background: #d5f0ea;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #1d7e70;
+    }
+
+    .contact-method div span {
+      color: #356f7c;
+      font-weight: 500;
+    }
+
+    .contact-method div h4 {
+      font-size: 1.4rem;
+      color: #0b3f48;
+    }
+
+    .booking-box {
+      flex: 1.5 1 280px;
+      background: #f1f9f7;
+      border-radius: 40px;
+      padding: 2.2rem;
+      text-align: center;
+    }
+
+    .booking-box h3 {
+      font-size: 2rem;
+      color: #11564b;
+      margin-bottom: 1rem;
+    }
+
+    .booking-box .btn-large {
+      background: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 1rem 2.8rem;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 8px 18px #91cfc3;
+      transition: 0.15s;
+      border: 0;
+    }
+
+    .booking-box .btn-large:hover {
+      background: #1e7d70;
+      box-shadow: 0 6px 14px #7bc2b5;
+    }
+
+    .booking-box small {
+      color: #3b717a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: #42727e;
+      border-top: 2px dashed #b6dbd2;
+    }
+
+    /* placeholder image (abstract doc) */
+    .placeholder-img {
+      background: #b7d5cf;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: #347169;
+      border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+    }
+
+    .avatar-placeholder {
+      background: #b7d5cf;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #24595f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-stethoscope"></i>
+        <span>Ridwan Ahmed Piyas</span>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#">Courses</a>
+        <a href="#contact" class="btn-appointment"><i class="far fa-calendar-check"></i> Appointment</a>
+        
+      </div>
+    </nav>
+
+    <!-- hero / home -->
+    <section id="home">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="hero-badge"><i class="fas fa-certificate"></i> MBBS  · 1+ years</span>
+          <h1>Compassionate care, <span>evidence-based</span> healing</h1>
+          <p class="hero-desc">I believe in treating the person, not just the symptoms. Your well‑being is my life’s work.</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">1k+</span>
+              <span class="stat-label">Patients</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">5+</span>
+              <span class="stat-label">Awards</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">2</span>
+              <span class="stat-label">Clinics</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <!-- abstract doctor illustration (font-awesome based) -->
+          <div class="placeholder-img">
+            <img src="./images/Gemini_Generated_Image_z9tjzoz9tjzoz9tj.png" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- about + qualifications -->
+    <section id="about">
+      <h2 class="section-title">About me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>Hi, I’m Ridwan Ahmed Piyasa</h3>
+          <p>I graduated with MBBS from Shaheed Monsur Ali Medical College, Uttara , and have dedicated my career to internal medicine and preventive healthcare. Over the last decade I’ve worked in both urban hospitals and rural outreach programs — because I believe quality healthcare is a right.</p>
+          <p>My approach is simple: listen thoroughly, explain clearly, and involve you in every decision. I’m also a visiting faculty at two medical colleges, because teaching keeps me sharp.</p>
+          <p><i class="fas fa-quote-left" style="color:#2a9d8f;"></i> The good physician treats the disease; the great physician treats the patient who has the disease.</p>
+        </div>
+        <div class="qual-grid">
+          <h4><i class="fas fa-graduation-cap"></i> Qualifications</h4>
+          <div class="qual-item">
+            <div class="qual-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="qual-content">
+              <h5>MBBS</h5>
+              <p>Maulana Azad Medical College, 2011 | Gold Medal</p>
+            </div>
+          </div>
+          <div class="qual-item">
+            <div class="qual-icon"><i class="fas fa-hospital-user"></i></div>
+            <div class="qual-content">
+              <h5>Shaheed Monsur Ali Medical College</h5>
+              <p>Sector#11,Uttara, Dhaka-1230· 2012–2015</p>
+            </div>
+          </div>
+          <div class="qual-item">
+            <div class="qual-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="qual-content">
+              <h5>Fellowship in Diabetes</h5>
+              <p>Pore Dimu ni vhai
+              </p>
+            </div>
+          </div>
+          <div class="qual-item">
+            <div class="qual-icon"><i class="fas fa-id-card"></i></div>
+            <div class="qual-content">
+              <h5>Medical registration</h5>
+              <p>Thakle bolen Update kore dei</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- services -->
+    <section id="services">
+      <h2 class="section-title">What I offer</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-notes-medical"></i></div>
+          <h3>General consultation</h3>
+          <p>Acute illnesses, fever, infections, and routine health checks — with a holistic eye.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-lungs"></i></div>
+          <h3>Respiratory care</h3>
+          <p>Asthma, COPD, allergies. I focus on long‑term breathing wellness.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-heart-pulse"></i></div>
+          <h3>Diabetes & hypertension</h3>
+          <p>Personalised management plans to keep your numbers in control.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-child"></i></div>
+          <h3>Pediatric care</h3>
+          <p>Right from infancy to adolescence — vaccinations & development.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-syringe"></i></div>
+          <h3>Travel vaccines</h3>
+          <p>Stay protected before your journey. WHO protocol followed.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-brain"></i></div>
+          <h3>Mental wellness</h3>
+          <p>Initial counselling & support for stress, anxiety — because mind matters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- gallery / moments (clinic life) -->
+    <section id="gallery">
+      <h2 class="section-title">Clinic glimpses</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <i class="fas fa-stethoscope"></i>
+          <p>Modern diagnostic centre</p>
+        </div>
+        <div class="gallery-item">
+          <i class="fas fa-hand-holding-heart"></i>
+          <p>Patient counselling</p>
+        </div>
+        <div class="gallery-item">
+          <i class="fas fa-heart-pulse"></i>
+          <p>Health camps</p>
+        </div>
+        <div class="gallery-item">
+          <i class="fas fa-microscope"></i>
+          <p>In‑house lab</p>
+        </div>
+      </div>
+
+      <!-- testimonials integrated into gallery section (still single page) -->
+      <h2 class="section-title" style="margin-top: 3rem;">Patient voices</h2>
+      <div class="testimonial-grid">
+        <div class="testi-card">
+          <i class="fas fa-quote-right"></i>
+          <p>Dr. Piyas listened to every small detail. He explained my condition in simple words, and I felt respected.</p>
+          <div class="testi-author">
+            <div class="avatar-placeholder"><i class="fas fa-user"></i></div>
+            <div class="author-info">
+              <h5>Sajib</h5>
+              <span>diabetes care</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <i class="fas fa-quote-right"></i>
+          <p>After years of changing doctors, finally someone who doesn't rush. My BP is under control now.</p>
+          <div class="testi-author">
+            <div class="avatar-placeholder"><i class="fas fa-user"></i></div>
+            <div class="author-info">
+              <h5>Provakar</h5>
+              <span>hypertension</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <i class="fas fa-quote-right"></i>
+          <p>The way he handles children is magical. My daughter actually asks to visit "doctor uncle".</p>
+          <div class="testi-author">
+            <div class="avatar-placeholder"><i class="fas fa-child"></i></div>
+            <div class="author-info">
+              <h5>Tisha</h5>
+              <span>Mother of Shimu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact + appointment CTA -->
+    <section id="contact">
+      <div class="contact-section">
+        <div class="contact-details">
+          <h2>Let’s talk about your health</h2>
+          <p><i class="fas fa-map-pin" style="color:#2a9d8f;"></i>  Consultations in-clinic & online</p>
+          <div class="contact-method">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <span>call / WhatsApp</span>
+              <h4>+880 1577-260915</h4>
+            </div>
+          </div>
+          <div class="contact-method">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <span>email</span>
+              <h4>piyasridwan@gmail.com</h4>
+            </div>
+          </div>
+          <div class="contact-method">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <span>main clinic</span>
+              <h4>Shaheed Monsur Ali Medical College, Uttara</h4>
+            </div>
+          </div>
+          <p style="margin-top: 1.2rem;"><i class="far fa-clock"></i>  Mon–Sat · 10 am – 6 pm</p>
+        </div>
+        <div class="booking-box">
+          <h3>Book a visit</h3>
+          <p>Priority slots for online booking</p>
+          <button class="btn-large"><i class="fas fa-calendar-check"></i>  Get appointment</button>
+          <small>or walk‑in · emergency number 24/7</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <p><i class="fas fa-heart" style="color:#d44c66;"></i> Ridwan Ahmed Piyas  •  all rights reserved  •  updated 2026</p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">
+        <a href="#" style="color:#286b76; text-decoration: none;">disclaimer</a>  •  
+        <a href="#" style="color:#286b76; text-decoration: none;">privacy</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- smooth scroll for anchor links (optional) -->
+  <script>
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
