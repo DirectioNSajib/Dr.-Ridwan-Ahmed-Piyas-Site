@@ -3,310 +3,752 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Learning Hub - Video & PDF</title>
+    <title>MedStudy Hub - MBBS Learning Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #1a2a3a;
-            padding: 15px;
-            min-height: 100vh;
+            background: #f0f2f5;
         }
 
-        .container {
+        /* Header */
+        .top-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .main-header {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .logo span {
+            color: #667eea;
+        }
+
+        .badge {
+            background: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .nav-menu a.active {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-icon {
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
             background: white;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            height: fit-content;
         }
 
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 15px 20px;
+        .course-info {
+            padding: 0 20px 15px 20px;
+            border-bottom: 1px solid #ecf0f1;
         }
 
-        .header h1 {
-            font-size: 1.5rem;
+        .course-info h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
         }
 
-        .header p {
+        .course-info p {
+            color: #7f8c8d;
             font-size: 0.9rem;
-            opacity: 0.9;
             margin-top: 5px;
         }
 
-        .main-content {
-            display: flex;
-            height: 80vh;
-            min-height: 500px;
-        }
-
-        /* Left side - Video */
-        .video-side {
-            flex: 2;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            border-right: 2px solid #2c3e50;
-        }
-
-        .video-container {
-            flex: 1;
-            background: #000;
-            position: relative;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            outline: none;
-        }
-
-        .video-info {
-            background: #34495e;
+        .live-badge {
+            background: #27ae60;
             color: white;
-            padding: 12px 15px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-left: 8px;
         }
 
-        .video-title {
-            font-weight: bold;
+        .semester {
+            background: #f8f9fa;
+            padding: 8px 15px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .semester i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .nav-section {
+            padding: 10px 0;
+        }
+
+        .nav-section-title {
+            padding: 10px 20px;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #f0f2f5;
+            border-left: 3px solid #667eea;
+        }
+
+        .nav-item.active {
+            background: #e8f0fe;
+            border-left: 3px solid #667eea;
+            color: #667eea;
+        }
+
+        .nav-item i {
+            width: 20px;
+            color: #95a5a6;
+        }
+
+        .nav-item.active i {
+            color: #667eea;
+        }
+
+        /* Main Content */
+        .content-area {
+            flex: 1;
+        }
+
+        /* Topic Header */
+        .topic-header {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .topic-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .topic-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        /* Main Content Card */
+        .main-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .lecture-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .lecture-icon {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .lecture-details h4 {
+            color: #2c3e50;
             margin-bottom: 5px;
         }
 
-        /* Right side - PDF */
-        .pdf-side {
-            flex: 1;
-            background: #ecf0f1;
-            display: flex;
-            flex-direction: column;
-            min-width: 300px;
-        }
-
-        .pdf-viewer {
-            flex: 1;
-            background: #bdc3c7;
-            min-height: 300px;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: white;
-        }
-
-        .pdf-placeholder {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .lecture-details p {
             color: #7f8c8d;
+            font-size: 0.9rem;
         }
 
-        .pdf-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 15px;
+        .page-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px solid #ecf0f1;
+            border-bottom: 1px solid #ecf0f1;
         }
 
-        /* Resources list */
-        .resources {
-            height: 200px;
+        .page-num {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
             background: white;
-            border-top: 2px solid #2c3e50;
-            overflow-y: auto;
-            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .resources h3 {
+        .nav-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Definition Box */
+        .definition-box {
+            background: #e8f0fe;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .definition-box h4 {
             color: #2c3e50;
             margin-bottom: 10px;
-            font-size: 1rem;
+        }
+
+        .definition-box p {
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        /* Resources Sidebar */
+        .resources-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .resource-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .resource-item {
             display: flex;
             align-items: center;
-            padding: 8px 10px;
-            margin-bottom: 5px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
             cursor: pointer;
-            border-left: 3px solid transparent;
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
 
         .resource-item:hover {
-            background: #e9ecef;
-            border-left-color: #3498db;
+            padding-left: 10px;
+            color: #667eea;
         }
 
-        .resource-item.active {
-            background: #d4e6f1;
-            border-left-color: #2980b9;
+        .resource-item i {
+            color: #667eea;
+            width: 20px;
         }
 
-        .resource-icon {
-            width: 30px;
-            height: 30px;
-            background: #3498db;
-            color: white;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            font-size: 0.9rem;
+        .resource-item.pdf i {
+            color: #e74c3c;
         }
 
-        .resource-icon.pdf {
-            background: #e74c3c;
+        .resource-item.video i {
+            color: #e67e22;
         }
 
         .resource-info {
             flex: 1;
         }
 
-        .resource-name {
-            font-weight: 600;
-            font-size: 0.9rem;
+        .resource-title {
+            font-weight: 500;
             color: #2c3e50;
         }
 
-        .resource-type {
-            font-size: 0.7rem;
+        .resource-meta {
+            font-size: 0.8rem;
             color: #7f8c8d;
         }
 
-        .drive-badge {
-            background: #f39c12;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.6rem;
-            margin-left: 8px;
-        }
-
-        /* Add resource section */
-        .add-section {
-            padding: 10px;
-            background: #f8f9fa;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .add-input {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-
-        .add-input input {
-            flex: 1;
-            padding: 6px 8px;
-            border: 1px solid #ced4da;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-
-        .add-input select {
-            width: 70px;
-            padding: 6px;
-            border: 1px solid #ced4da;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-
-        .add-btn {
+        .download-btn {
             background: #27ae60;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.8rem;
+            padding: 10px 20px;
+            border-radius: 5px;
             width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s;
         }
 
-        .add-btn:hover {
+        .download-btn:hover {
             background: #229954;
         }
 
-        .note {
-            font-size: 0.7rem;
+        /* YouTube Section */
+        .youtube-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .youtube-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        /* Windows Activation */
+        .windows-activation {
+            background: #f0f2f5;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
             color: #7f8c8d;
-            margin-top: 5px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Topics List */
+        .topics-list {
+            list-style: none;
+            padding: 10px 0;
+        }
+
+        .topics-list li {
+            padding: 8px 20px;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .topics-list li i {
+            color: #667eea;
+            width: 20px;
+            font-size: 0.8rem;
+        }
+
+        .sub-list {
+            padding-left: 48px;
+            list-style: none;
+        }
+
+        .sub-list li {
+            padding: 5px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .sub-list li i {
+            color: #95a5a6;
+            font-size: 0.7rem;
+        }
+
+        .active-window {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            color: #856404;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-graduation-cap"></i> Simple Learning Hub</h1>
-            <p>Click on any resource to load video or PDF from Google Drive</p>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div>📞 Support: +880 1234-567890</div>
+        <div>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
+    </div>
 
-        <div class="main-content">
-            <!-- Left Side - Video -->
-            <div class="video-side">
-                <div class="video-container">
-                    <video id="videoPlayer" controls>
-                        <source src="" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="video-info">
-                    <div class="video-title" id="videoTitle">Select a video to play</div>
-                    <div><i class="fas fa-play-circle"></i> Click play button to start</div>
-                </div>
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="logo-area">
+            <div class="logo">Med<span>Study</span> Hub</div>
+            <div class="badge">MBBS</div>
+        </div>
+        <div class="nav-menu">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Courses</a>
+            <a href="#">Resources</a>
+            <a href="#">Community</a>
+        </div>
+        <div class="user-menu">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-envelope"></i>
+            <div class="user-icon">DR</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="course-info">
+                <h3>MBBS Clinical Skills</h3>
+                <p>MED 301 - Batch 2026</p>
+                <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
             </div>
 
-            <!-- Right Side - PDF -->
-            <div class="pdf-side">
-                <div class="pdf-viewer">
-                    <iframe id="pdfFrame" style="display: none;"></iframe>
-                    <div class="pdf-placeholder" id="pdfPlaceholder">
-                        <i class="fas fa-file-pdf"></i>
-                        <p>No PDF selected</p>
-                        <small>Click on a PDF from the list</small>
-                    </div>
-                </div>
+            <div class="semester">
+                <i class="fas fa-calendar"></i> Spring 2026 (63_G)
+            </div>
 
-                <!-- Resources List -->
-                <div class="resources">
-                    <h3><i class="fas fa-folder-open"></i> Course Materials</h3>
-                    <div id="resourcesList">
-                        <!-- Resources will be added here by JavaScript -->
-                    </div>
-                </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Course Content</div>
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-book-open"></i>
+                    <span>Mobile Application Design</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>Clinical Diagnosis</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>Cardiology Basics</span>
+                </a>
+            </div>
 
-                <!-- Add New Resource Section -->
-                <div class="add-section">
-                    <div class="add-input">
-                        <input type="text" id="resourceName" placeholder="Resource name (e.g., Lecture 1)">
-                        <select id="resourceType">
-                            <option value="video">Video</option>
-                            <option value="pdf">PDF</option>
-                        </select>
+            <div class="nav-section">
+                <div class="nav-section-title">Study Resources</div>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    <span>Spring 25, MBBS Notes</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    <span>Fall 25, Clinical Skills</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Note 1</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Note 2</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Syllabus</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Probable Marks Distribution</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Topics</div>
+                <ul class="topics-list">
+                    <li><i class="fas fa-check-circle"></i> 1. Introduction to Clinical Medicine</li>
+                    <li><i class="fas fa-check-circle"></i> 2. Patient Examination</li>
+                    <li><i class="fas fa-circle"></i> 3. UCD in Healthcare
+                        <ul class="sub-list">
+                            <li><i class="fas fa-angle-right"></i> UCD - English</li>
+                            <li><i class="fas fa-angle-right"></i> UCD - Hindi</li>
+                            <li><i class="fas fa-angle-right"></i> Clinical vs Traditional Approach</li>
+                            <li><i class="fas fa-angle-right"></i> Patient-Centered Design</li>
+                        </ul>
+                    </li>
+                    <li><i class="fas fa-circle"></i> 4. Diagnostic Protocols</li>
+                    <li><i class="fas fa-circle"></i> 5. Treatment Planning</li>
+                    <li><i class="fas fa-circle"></i> 6. Medical Ethics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Topic Header -->
+            <div class="topic-header">
+                <h1 class="topic-title">What is User-centered Design in Healthcare? Simply understand it</h1>
+                <p class="topic-description">
+                    Understanding how to put patients at the center of medical practice - a modern approach to healthcare delivery
+                </p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Column - Main Content -->
+                <div class="main-card">
+                    <h2 class="section-title">User-Centered Design in Healthcare</h2>
+                    
+                    <div class="lecture-info">
+                        <div class="lecture-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="lecture-details">
+                            <h4>Dr. Sarah Johnson</h4>
+                            <p>Professor of Clinical Medicine • 15+ years experience</p>
+                        </div>
                     </div>
-                    <div class="add-input">
-                        <input type="text" id="driveLink" placeholder="Google Drive share link or file ID">
+
+                    <div class="definition-box">
+                        <h4>Definition</h4>
+                        <p>An iterative medical approach that focuses on patients and their families, emphasizing the importance of creating intuitive, accessible, and compassionate healthcare experiences.</p>
                     </div>
-                    <button class="add-btn" onclick="addResource()">
-                        <i class="fas fa-plus"></i> Add to List
+
+                    <div class="page-indicator">
+                        <span class="page-num">Page 1/15</span>
+                        <div class="nav-buttons">
+                            <button class="nav-btn"><i class="fas fa-chevron-left"></i> Previous</button>
+                            <button class="nav-btn">Next <i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <h3 style="color: #2c3e50; margin-bottom: 15px;">Key Principles:</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #27ae60;"></i> Patient-first approach in all decisions</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #27ae60;"></i> Iterative feedback from patients and families</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #27ae60;"></i> Accessible communication and clear explanations</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #27ae60;"></i> Empathy and understanding in every interaction</li>
+                        </ul>
+                    </div>
+
+                    <button class="download-btn" style="margin-top: 25px;">
+                        <i class="fas fa-download"></i> Download Lecture Notes
                     </button>
-                    <div class="note">
-                        <i class="fab fa-google-drive"></i> Use Google Drive share links
+                </div>
+
+                <!-- Right Column - Resources -->
+                <div class="resources-sidebar">
+                    <div class="resource-card">
+                        <h3><i class="fas fa-video"></i> Video Lectures</h3>
+                        <div class="resource-item video">
+                            <i class="fas fa-play-circle"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Introduction to UCD</div>
+                                <div class="resource-meta">15 mins • Dr. Sarah</div>
+                            </div>
+                        </div>
+                        <div class="resource-item video">
+                            <i class="fas fa-play-circle"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Patient Communication</div>
+                                <div class="resource-meta">22 mins • Dr. Ahmed</div>
+                            </div>
+                        </div>
+                        <div class="resource-item video">
+                            <i class="fas fa-play-circle"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Case Studies</div>
+                                <div class="resource-meta">30 mins • Panel</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h3><i class="fas fa-file-pdf"></i> PDF Resources</h3>
+                        <div class="resource-item pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">UCD Lecture Notes</div>
+                                <div class="resource-meta">PDF • 2.4 MB</div>
+                            </div>
+                        </div>
+                        <div class="resource-item pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Clinical Guidelines</div>
+                                <div class="resource-meta">PDF • 5.1 MB</div>
+                            </div>
+                        </div>
+                        <div class="resource-item pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Patient Assessment Forms</div>
+                                <div class="resource-meta">PDF • 1.8 MB</div>
+                            </div>
+                        </div>
+                        <button class="download-btn" style="margin-top: 15px;">
+                            <i class="fas fa-download"></i> Download All
+                        </button>
+                    </div>
+
+                    <!-- YouTube Section -->
+                    <div class="youtube-section">
+                        <div class="youtube-header">
+                            <i class="fab fa-youtube" style="font-size: 1.5rem;"></i>
+                            <h3>YouTube Lectures</h3>
+                        </div>
+                        <div class="resource-item video" style="border: none;">
+                            <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Clinical Examination Techniques</div>
+                                <div class="resource-meta">Dr. Smith • 45 mins</div>
+                            </div>
+                        </div>
+                        <div class="resource-item video" style="border: none;">
+                            <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                            <div class="resource-info">
+                                <div class="resource-title">Patient History Taking</div>
+                                <div class="resource-meta">Dr. Kumar • 38 mins</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Windows Activation (kept for authenticity) -->
+                    <div class="windows-activation">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Computer Graphics Settings to activate Windows.</span>
+                        <span class="active-window">Activate Windows</span>
                     </div>
                 </div>
             </div>
@@ -314,208 +756,47 @@
     </div>
 
     <script>
-        // Sample resources (with working Google Drive file IDs - replace these with your own)
-        let resources = [
-            {
-                id: 1,
-                name: 'Sample Video Lecture',
-                type: 'video',
-                driveId: '1VxqJ3W6qKJgH5s8d9fG7hJ2kL4mN5bP6', // Replace with your video ID
-                driveLink: 'https://drive.google.com/file/d/1VxqJ3W6qKJgH5s8d9fG7hJ2kL4mN5bP6/view'
-            },
-            {
-                id: 2,
-                name: 'Sample PDF Notes',
-                type: 'pdf',
-                driveId: '1AbCdEfGhIjKlMnOpQrStUvWxYz123456', // Replace with your PDF ID
-                driveLink: 'https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz123456/view'
-            },
-            {
-                id: 3,
-                name: 'Introduction Video',
-                type: 'video',
-                driveId: '2BcDeFgHiJkLmNoPqRsTuVwXyZ789012', // Replace with your video ID
-                driveLink: 'https://drive.google.com/file/d/2BcDeFgHiJkLmNoPqRsTuVwXyZ789012/view'
-            }
-        ];
-
-        let currentVideo = null;
-        let currentPdf = null;
-
-        // DOM elements
-        const videoPlayer = document.getElementById('videoPlayer');
-        const videoTitle = document.getElementById('videoTitle');
-        const pdfFrame = document.getElementById('pdfFrame');
-        const pdfPlaceholder = document.getElementById('pdfPlaceholder');
-        const resourcesList = document.getElementById('resourcesList');
-
-        // Initialize the page
-        window.onload = function() {
-            renderResources();
-        };
-
-        // Extract file ID from Google Drive link
-        function extractDriveId(link) {
-            // Handle different formats
-            let id = link;
-            
-            // If it's a full URL, extract the ID
-            if (link.includes('drive.google.com')) {
-                // Pattern: /file/d/FILE_ID/view
-                const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                if (match) {
-                    id = match[1];
-                }
-            }
-            
-            return id;
-        }
-
-        // Render resources list
-        function renderResources() {
-            let html = '';
-            
-            resources.forEach(resource => {
-                const icon = resource.type === 'video' ? 'fa-video' : 'fa-file-pdf';
-                const iconClass = resource.type === 'video' ? '' : 'pdf';
+        // Simple interactive features
+        document.querySelectorAll('.resource-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all
+                document.querySelectorAll('.resource-item').forEach(r => r.style.background = 'none');
+                // Add highlight to clicked
+                this.style.background = '#e8f0fe';
                 
-                html += `
-                    <div class="resource-item" onclick="loadResource(${resource.id})" id="resource-${resource.id}">
-                        <div class="resource-icon ${iconClass}">
-                            <i class="fas ${icon}"></i>
-                        </div>
-                        <div class="resource-info">
-                            <div class="resource-name">${resource.name}</div>
-                            <div class="resource-type">
-                                ${resource.type.toUpperCase()} 
-                                <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                // Simulate loading content
+                const title = this.querySelector('.resource-title')?.textContent || 'Resource';
+                alert(`Loading: ${title}\n\nIn a full version, this would open the video/PDF.`);
             });
-            
-            resourcesList.innerHTML = html;
-        }
+        });
 
-        // Load resource (video or PDF)
-        function loadResource(resourceId) {
-            const resource = resources.find(r => r.id === resourceId);
-            
-            if (!resource) return;
-            
-            // Remove active class from all
-            document.querySelectorAll('.resource-item').forEach(item => {
-                item.classList.remove('active');
+        // Download buttons
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Download started!\n\nThis is a demo - in the real version, files would download from your Google Drive.');
             });
-            
-            // Add active class to clicked item
-            const activeItem = document.getElementById(`resource-${resourceId}`);
-            if (activeItem) {
-                activeItem.classList.add('active');
-            }
-            
-            if (resource.type === 'video') {
-                loadVideo(resource);
-            } else {
-                loadPdf(resource);
-            }
-        }
+        });
 
-        // Load video from Google Drive
-        function loadVideo(resource) {
-            const driveId = extractDriveId(resource.driveLink);
-            
-            // For Google Drive videos, we need to use the embed link
-            // Note: The video must be shared with "Anyone with the link can view"
-            const embedUrl = `https://drive.google.com/file/d/17b-2Bd-NAGNJpQmLiBBwz5OlpptrpZI-/view?usp=drive_link`;
-            
-            // For direct video playback, we can use the Google Drive embed
-            videoPlayer.innerHTML = `<source src="https://drive.google.com/uc?export=download&id=${driveId}" type="video/mp4">`;
-            videoPlayer.load();
-            
-            videoTitle.textContent = resource.name;
-            currentVideo = resource;
-            
-            // Try to play
-            videoPlayer.play().catch(e => {
-                console.log('Autoplay failed:', e);
+        // Navigation buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Navigating to next/previous page (demo functionality)');
             });
-        }
+        });
 
-        // Load PDF from Google Drive
-        function loadPdf(resource) {
-            const driveId = extractDriveId(resource.driveLink);
-            
-            // Google Drive PDF embed URL
-            const pdfUrl = `https://drive.google.com/file/d/${driveId}/preview`;
-            
-            pdfFrame.src = pdfUrl;
-            pdfFrame.style.display = 'block';
-            pdfPlaceholder.style.display = 'none';
-            
-            currentPdf = resource;
-        }
-
-        // Add new resource from input fields
-        function addResource() {
-            const nameInput = document.getElementById('resourceName');
-            const typeSelect = document.getElementById('resourceType');
-            const linkInput = document.getElementById('driveLink');
-            
-            const name = nameInput.value.trim();
-            const type = typeSelect.value;
-            const link = linkInput.value.trim();
-            
-            if (!name) {
-                alert('Please enter a resource name');
-                return;
-            }
-            
-            if (!link) {
-                alert('Please enter a Google Drive link or file ID');
-                return;
-            }
-            
-            // Extract ID to validate format
-            const driveId = extractDriveId(link);
-            if (!driveId || driveId.length < 10) {
-                alert('Please enter a valid Google Drive file ID or link');
-                return;
-            }
-            
-            // Create new resource
-            const newResource = {
-                id: Date.now(), // simple unique ID
-                name: name,
-                type: type,
-                driveLink: link,
-                driveId: driveId
-            };
-            
-            resources.push(newResource);
-            renderResources();
-            
-            // Clear inputs
-            nameInput.value = '';
-            linkInput.value = '';
-            
-            // Auto-load the new resource
-            loadResource(newResource.id);
-        }
-
-        // Helper function to test Google Drive links
-        function testDriveLink() {
-            console.log('To use Google Drive files:');
-            console.log('1. Upload your file to Google Drive');
-            console.log('2. Right-click file → Share → "Anyone with the link"');
-            console.log('3. Copy the link (e.g., https://drive.google.com/file/d/FILE_ID/view)');
-            console.log('4. Paste the link in the input field');
-        }
-
-        // Call test function in console
-        console.log('=== INSTRUCTIONS ===');
-        testDriveLink();
+        // Sidebar navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update main title based on selection (demo)
+                const text = this.querySelector('span')?.textContent || 'section';
+                document.querySelector('.topic-title').textContent = text;
+                alert(`Loading ${text} content (demo)`);
+            });
+        });
     </script>
 </body>
 </html>
